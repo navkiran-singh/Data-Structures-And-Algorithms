@@ -22,12 +22,17 @@ void getMinimum(stack_class &stk){
     }
     cout<<minimum<<endl;
 }
+
 int main()
-{stack_class stk;
+{stack_class stk,minstk;
  int input;
  for(int i=0;i<5;++i)
  {  cin>>input;
      stk.push(input);
+     if(i!=0)
+     if(input<minstk.istop()) minstk.push(input); else minstk.push(minstk.istop());
+     else minstk.push(input);
  }
  getMinimum(stk); // in O(n) time complexity
+ cout<<"Minimum via auxillary stack:"<<minstk.istop();
 }
