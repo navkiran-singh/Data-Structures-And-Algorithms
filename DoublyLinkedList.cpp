@@ -22,6 +22,7 @@ void display(node *head){
         cout<<head->data<<" ";
         head=head->next;
     }
+    cout<<"\n";
 }
 
 void reverse(node **head_ref){
@@ -36,13 +37,34 @@ void reverse(node **head_ref){
     }
     *head_ref=temp->prev;
 }
+void deletenode(node *head, int index){
+    node *current=head;
+    int count=1;
+    node *temp;
+    if(current==NULL) return;
+    while(current!=NULL)
+    {   if(index==count)
+    {
+        temp=current;
+        if(current->prev!=NULL)
+        current->prev->next=current->next;
+        if(current->next!=NULL)
+        current->next->prev=current->prev;
+        delete(temp);
+    }
+    current=current->next;
+        count++;
+    }
+}
 int main()
 {
     node *head1=NULL;
     push(&head1,10);
     push(&head1,20);
     push(&head1,30);
+    push(&head1,40);
     display(head1);
     reverse(&head1);
+    deletenode(head1,2);
     display(head1);
 }
